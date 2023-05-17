@@ -2,13 +2,22 @@ import { useState } from 'react'
 import './App.css'
 import drinks from './drinks.json'
 import logo from './logo.png'
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
 
 type Drink = {
   name: string
   pic: string
 }
 
-function App() {
+function App({ signOut }) {
 
   const [drink1, setDrink1] = useState<Drink>(drinks[0])
   const [drink2, setDrink2] = useState<Drink>(drinks[1])
@@ -61,9 +70,10 @@ function App() {
           <h2>{drink2.name}</h2>
         </div>
       </div>
+      <Button onClick={signOut}>Sign Out</Button>
   </div>
   )
 }
 
-export default App
+export default withAuthenticator(App);
 
